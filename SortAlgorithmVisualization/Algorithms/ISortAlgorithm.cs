@@ -10,6 +10,6 @@ namespace SortAlgorithmVisualization
     {
         T[] Data { get; }
         void Initialize(T[] data);
-        bool Step();
+        bool Step(out int[] changed);
     }
 }

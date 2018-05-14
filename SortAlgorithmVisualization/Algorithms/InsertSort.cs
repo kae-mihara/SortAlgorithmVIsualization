@@ -23,8 +23,9 @@ namespace SortAlgorithmVisualization.Algorithms
             j = i - 1;
         }
 
-        public bool Step()
+        public bool Step(out int[] changed)
         {
+            changed = null;
             if (i == _data.Length) return true;
             if (!flag)
             {
@@ -41,13 +42,16 @@ namespace SortAlgorithmVisualization.Algorithms
             if (j >= 0 && insert.CompareTo(_data[j]) == -1)
             {
                 _data[j + 1] = _data[j];
+                changed = new[] { j + 1, j };
                 j--;
             }
             else
             {
                 flag = false;
                 _data[j + 1] = insert;
+                changed = new[] { i, j };
             }
+            
             return false;
         }
     }

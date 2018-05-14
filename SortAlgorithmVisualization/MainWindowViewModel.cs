@@ -30,12 +30,26 @@ namespace SortAlgorithmVisualization
             {
                 var data = datas[i];
                 var geo = new StreamGeometry();
+                var changed = changed_indexes[i];
                 using (var context = geo.Open())
                 {
                     for (int j = 0; j < data.Length; ++j)
                     {
-                        context.BeginFigure(new Point(j * 4, 0), false, false);
-                        context.LineTo(new Point(j * 4, data[j]), true, false);
+                        if (changed?.Contains(j) ?? false)
+                        {
+                            var x1 = j * 4 - 1;
+                            var x2 = j * 4 + 1;
+                            var y = data[j];
+                            context.BeginFigure(new Point(x1, 0), true, true);
+                            context.LineTo(new Point(x1, y), false, false);
+                            context.LineTo(new Point(x2, y), false, false);
+                            context.LineTo(new Point(x2, 0), false, false);
+                        }
+                        else
+                        {
+                            context.BeginFigure(new Point(j * 4, 0), false, false);
+                            context.LineTo(new Point(j * 4, data[j]), true, false);
+                        }
                     }
                 }
                 geo.Freeze();
@@ -49,10 +63,11 @@ namespace SortAlgorithmVisualization
         {
             lock (datas)
             {
+                changed_indexes = new int[sorts.Length][];
                 bool all_completed = true;
-                for(int i =0;i< sorts.Length; ++i)
+                for (int i = 0; i < sorts.Length; ++i)
                 {
-                    if (!(all_completed &= sorts[i].Step()))
+                    if (!(all_completed &= sorts[i].Step(out changed_indexes[i])))
                         datas[i] = sorts[i].Data;
                 }
                 if (all_completed) Stop();
@@ -86,6 +101,7 @@ namespace SortAlgorithmVisualization
                 data[i] = data[shuffle];
                 data[shuffle] = temp;
             }
+            changed_indexes = new int[sorts.Length][];
             datas = new int[sorts.Length][];
             for (int i = 0; i < datas.Length; ++i)
             {
@@ -99,9 +115,11 @@ namespace SortAlgorithmVisualization
             ticked = true;
         }
         private int[][] datas;
+        private int[][] changed_indexes;
         private ISortAlgorithm<int>[] sorts = new ISortAlgorithm<int>[]
         {
             new BubbleSort<int>(),
+            new QuickSort<int>(),
             new InsertSort<int>(),
             new ShellSort<int>()
         };

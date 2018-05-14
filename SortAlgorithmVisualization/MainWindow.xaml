@@ -18,9 +18,10 @@
                     <ScaleTransform CenterY="100" ScaleY="-1"/>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Fill" Value="Yellow"/>
             <Setter Property="Stroke" Value="Green"/>
             <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Margin" Value="2 0 0 0"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
     <Grid Background="Black">
@@ -30,9 +31,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Path Grid.Row="0" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[0]}"/>
-        <Path Grid.Row="1" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[1]}"/>
-        <Path Grid.Row="2" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[2]}"/>
-        <Button Grid.Row="3" Height="30" Click="Button_Click">Start</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Path Grid.Row="0" Grid.Column="0" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[0]}"/>
+        <Path Grid.Row="1" Grid.Column="0" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[1]}"/>
+        <Path Grid.Row="0" Grid.Column="1" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[2]}"/>
+        <Path Grid.Row="1" Grid.Column="1" Style="{StaticResource PresenterPathStyle}" Data="{Binding Geometries[3]}"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="3" Height="30" Click="Button_Click">Start</Button>
     </Grid>
 </Window>

@@ -20,8 +20,9 @@ namespace SortAlgorithmVisualization.Algorithms
             _j = _data.Length - 1;
         }
 
-        public bool Step()
+        public bool Step(out int[] changed)
         {
+            changed = null;
             if (_i == _data.Length - 1) return true;
             while (_data[_j].CompareTo(_data[_j - 1]) != -1)
             {
@@ -36,6 +37,7 @@ namespace SortAlgorithmVisualization.Algorithms
             var temp = _data[_j - 1];
             _data[_j - 1] = _data[_j];
             _data[_j] = temp;
+            changed = new[] { _j - 1, _j };
             return false;
         }
     }
