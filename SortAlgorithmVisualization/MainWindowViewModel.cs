@@ -35,7 +35,7 @@ namespace SortAlgorithmVisualization
                 {
                     for (int j = 0; j < data.Length; ++j)
                     {
-                        if (changed?.Contains(j) ?? false)
+                        if (changed != null && (j == changed[0] || j == changed[1]))
                         {
                             var x1 = j * 4 - 1;
                             var x2 = j * 4 + 1;

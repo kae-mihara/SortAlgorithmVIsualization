@@ -36,8 +36,8 @@ namespace SortAlgorithmVisualization.Algorithms
             if (!flag && stack.Count == 0) return true;
             if (!flag)
             {
-                high = stack.Pop();
-                low = stack.Pop();
+                high = high_bound = stack.Pop();
+                low = low_bound = stack.Pop();
                 pivot = _data[low];
                 flag = true;
             }
@@ -46,18 +46,19 @@ namespace SortAlgorithmVisualization.Algorithms
                 _data[low] = pivot;
                 flag = false;
                 var mid = low;
-                if (low_bound < mid - 1)
-                {
-                    stack.Push(low_bound);
-                    stack.Push(mid - 1);
-                }
                 if (mid + 1 < high_bound)
                 {
                     stack.Push(mid + 1);
                     stack.Push(high_bound);
                 }
+                if (low_bound < mid - 1)
+                {
+                    stack.Push(low_bound);
+                    stack.Push(mid - 1);
+                }
+                
             }
-            while (low<high&&_data[high].CompareTo(pivot) != -1) high--;
+            while (low < high && _data[high].CompareTo(pivot) != -1) high--;
             _data[low] = _data[high];
             while (low < high && _data[low].CompareTo(pivot) != 1) low++;
             _data[high] = _data[low];
