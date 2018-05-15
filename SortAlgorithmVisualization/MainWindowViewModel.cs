@@ -121,7 +121,8 @@ namespace SortAlgorithmVisualization
             new BubbleSort<int>(),
             new QuickSort<int>(),
             new InsertSort<int>(),
-            new ShellSort<int>()
+            new ShellSort<int>(),
+            new SelectSort<int>()
         };
         private bool ticked = false;
         private bool initialized = false;

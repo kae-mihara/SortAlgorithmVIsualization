@@ -61,6 +61,7 @@
     <Compile Include="Algorithms\BubbleSort.cs" />
     <Compile Include="Algorithms\InsertSort.cs" />
     <Compile Include="Algorithms\QuickSort.cs" />
+    <Compile Include="Algorithms\SelectSort.cs" />
     <Compile Include="Algorithms\ShellSort.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
